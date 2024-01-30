@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>PacMan</title>
+
+</head>
+
+
+<body>
+    <script>
+        // Your JavaScript code goes here
+        let pacPos = 0
+        let max_x = 5
+        let  min_x = -5
+
+
+        function drawBoard() {
+            let s = ""
+            document.getElementById('game').textContent = '';
+            for (i = -5; i <5; i++){
+                if (i == pacPos){
+                    s= s+"x"
+                }else{
+                s = s +"."}
+            }
+            document.getElementById('game').textContent = s;
+            return
+        }
+
+        function move(event) {
+
+            if (event.key == 'ArrowRight'){
+                pacPos += 1
+                
+            } else if (event.key == 'ArrowLeft'){
+                pacPos -= 1
+            }
+            console.log(pacPos)
+            drawBoard() 
+            document.addEventListener('keydown', move);
+
+        }
+    
+        // Add event listener for keydown events
+        document.addEventListener('keydown', move);
+        
+    
+
+
+    </script>
+
+
+
+<div id ="game"></div>
+
+
+</body>
+
+
+
+</html>
