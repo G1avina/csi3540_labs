@@ -11,10 +11,15 @@
 
 <body>
     <div id ="game"></div>
+    <br><br>
+    Score:
+    <div id ="score">0</div>
+
 
     <script>
         // Your JavaScript code goes here
         let pacPos = 0;
+        let ghost =5;
         const max_x = 5;
         const  min_x = -5;
         let fruit = 0;
@@ -31,16 +36,152 @@
             {fruit = rand();}
             return;
         }
+
+        function check(){
+            if (ghost > max_x){
+                ghost = min_x;
+            }else if(ghost <min_x){
+                ghost = max_x;
+            }
+
+        }
+        let stage = 0;
+        let current =0;
+        function ghostPos(){
+            let x = 4;
+            let y = 1
+            let randomValue = Math.floor(Math.random() * (x - y + 1)) + y;
+            switch(current){
+                case 0:
+                    current = randomValue;
+                    break;
+                case 1:
+                    switch(stage){
+                        case 5:
+                            ghost += 1;
+                            check();
+                            stage = 0;
+                            current = 0;
+                            break;
+                        default:
+                            ghost += 1;
+                            check();
+                            stage +=1
+                            break;
+                           
+                    }
+                    break;
+
+                case 2:
+                    switch(stage){
+                        case 5:
+                            ghost -= 1;
+                            check();
+                            stage = 0;
+                            current = 0;
+                            break;
+                        default:
+                            ghost -= 1;
+                            check();
+                            stage +=1
+                            break;
+                    }
+                break;
+                
+                case 3:
+                    switch(stage){
+                        case 0:
+                            ghost += 1;
+                            check();
+                            stage +=1
+                            break;
+
+                        case 1:
+                            ghost -= 1;
+                            check();
+                            stage +=1
+                            break;
+
+                        case 2:
+                            ghost -= 1;
+                            check();
+                            stage +=1
+                            break;
+                    
+                        case 5:
+                            ghost += 1;
+                            check();
+                            stage = 0;
+                            current = 0;
+                            break;
+                        default:
+                            ghost += 1;
+                            check();
+                            stage +=1
+                            break;
+                    }
+                    
+                    break;
+
+                    case 4:
+                    switch(stage){
+                        case 0:
+                            ghost -= 1;
+                            check();
+                            stage +=1
+                            break;
+
+                        case 1:
+                            ghost += 1;
+                            check();
+                            stage +=1
+                            break;
+
+                        case 2:
+                            ghost += 1;
+                            check();
+                            stage +=1
+                            break;
+                    
+                        case 5:
+                            ghost -= 1;
+                            check();
+                            stage = 0;
+                            current = 0;
+                            break;
+                        default:
+                            ghost -= 1;
+                            check();
+                            stage +=1
+                            break;
+                    }
+                    
+                    break;
+                
+            }
+
+
+                
+
+            drawBoard();
+        }
         
         
 
 
         function drawBoard() {
+            //if pacman collide is on fruit 
             if(pacPos == fruit){
                 score += 5
+                document.getElementById('score').textContent = score;
                 console.log(score);
                 fruitPos();
-                
+            }
+
+            if(pacPos ==ghost){
+                score -= 5
+                document.getElementById('score').textContent = score;
+                console.log(score);
             }
 
             let s = ""
@@ -50,6 +191,8 @@
                     s= s+"x";
                 }else if(i == fruit){
                     s = s+"@";
+                }else if(i == ghost){
+                    s = s+"c";
                 }else{
                 s = s + ".";
                 }
@@ -62,14 +205,14 @@
 
             if (event.key == 'ArrowRight'){
                 if (pacPos == max_x){
-                    pacPos = -5;
+                    pacPos = min_x;
                 }else{
                     pacPos += 1;
                 }
                 
             } else if (event.key == 'ArrowLeft'){
                 if (pacPos == min_x){
-                    pacPos = 5;
+                    pacPos = max_x;
                 }else{
                     pacPos -= 1;
                 }
@@ -85,8 +228,10 @@
         // Add event listener for keydown events
         fruitPos();
         drawBoard();
-        document.addEventListener('keydown', move);
-        
+
+       document.addEventListener('keydown', move);
+        var intervalId = window.setInterval(function(){
+            ghostPos()}, 350);
         
     
 
