@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<head>
+
+<title>Q 12.6</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        padding: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    select {
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+Question 12.6
+   <br> 
+
+<div class="container">
+    <label for="backgroundColor">Background Color:</label>
+    <input type="color" id="backgroundColor">
+
+    <label for="fontFamily">Font Family:</label>
+    <select id="fontFamily">
+        <option value="Arial, sans-serif">Sans-serif</option>
+        <option value="Georgia, serif">Serif</option>
+    </select>
+</div>
+
+<script>
+    const backgroundColorInput = document.getElementById('backgroundColor');
+    const fontFamilySelect = document.getElementById('fontFamily');
+
+    backgroundColorInput.addEventListener('change', function() {
+        document.body.style.backgroundColor = backgroundColorInput.value;
+    });
+
+    fontFamilySelect.addEventListener('change', function() {
+        const selectedFont = fontFamilySelect.value;
+        document.body.style.fontFamily = selectedFont;
+    });
+</script>
+
+</body>
+</html>

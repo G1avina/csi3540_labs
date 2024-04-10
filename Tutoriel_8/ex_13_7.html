@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+
+<head>
+
+<title>Q 13.7</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    #imageContainer {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    }
+    #draggableImage {
+        position: absolute;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div id="imageContainer">
+    <img id="draggableImage" src="https://via.placeholder.com/150" alt="Draggable Image">
+</div>
+
+<script>
+    const draggableImage = document.getElementById('draggableImage');
+
+ 
+    let initialX;
+    let initialY;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    
+    function handleMouseDown(event) {
+        initialX = event.clientX - offsetX;
+        initialY = event.clientY - offsetY;
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    
+    function handleMouseMove(event) {
+        offsetX = event.clientX - initialX;
+        offsetY = event.clientY - initialY;
+        draggableImage.style.left = offsetX + 'px';
+        draggableImage.style.top = offsetY + 'px';
+    }
+
+  
+    function handleMouseUp() {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+    }
+
+   
+    draggableImage.addEventListener('mousedown', handleMouseDown);
+</script>
+
+</body>
+</html>

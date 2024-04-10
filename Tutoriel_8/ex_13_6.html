@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+
+<title>Q 13.6</title>
+</head>
+<body>
+
+<script>
+
+function handleClick(event) {
+    
+    if (event.shiftKey) {
+        alert('Shift key down');
+    }
+    
+    else if (event.ctrlKey || event.metaKey) {
+        alert('Control key down');
+    }
+    
+    else {
+        alert('No key down');
+    }
+}
+
+
+document.addEventListener('click', handleClick);
+</script>
+
+</body>
+</html>
